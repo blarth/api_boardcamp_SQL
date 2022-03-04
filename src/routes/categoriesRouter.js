@@ -1,5 +1,5 @@
 import express from 'express';
-import { categoriesGet, categoriesPost } from '../controllers/catController';
+import { categoriesGet, categoriesPost } from '../controllers/catController.js';
 
 const catRouter = express.Router()
 
