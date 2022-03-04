@@ -8,7 +8,7 @@ export async function categoriesGet(req, res){
         `)
         res.send(arrayCategories)
 }catch (error) {
-    if (error) return res.status(error.status).send([]);
+    
 
     res.status(500).send(error.message)
 }
@@ -17,7 +17,7 @@ export async function categoriesGet(req, res){
 
 export async function categoriesPost(req, res){
 
-    const {name} = req.body
+    const name = req.locals.name
 
     try {
         const alreadyInCategorie = await connection.query(`
@@ -33,8 +33,9 @@ export async function categoriesPost(req, res){
                  VALUES  ( $1 )
         `, [ name ]);
         
+        res.sendStatus(201)
 }catch (error) {
-    if (error) return res.status(error.status).send([]);
+    
 
     res.status(500).send(error.message)
 }
