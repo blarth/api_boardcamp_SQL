@@ -1,4 +1,5 @@
 import express from 'express';
+import { categoriesGet } from '../controllers/catController';
 
 const catRouter = express.Router()
 
