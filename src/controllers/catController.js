@@ -13,7 +13,7 @@ export async function categoriesGet(req, res) {
 }
 
 export async function categoriesPost(req, res) {
-  const name = req.locals.name;
+  const name = res.locals.category.name;
 
   try {
     const alreadyInCategorie = await connection.query(
