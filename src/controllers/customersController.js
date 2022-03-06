@@ -16,4 +16,29 @@ export async function customersGet(req, res){
             res.status(500).send(error.message);
         }
     }
+    if(!cpf){
+        try {
+            const {rows : customerId} = await connection.query(`
+            SELECT * 
+            FROM customers
+            WHERE customers.id=$1
+            `,[id])
+            res.send(customerId)
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    }
+
+    try {
+        const {rows : customerCpf} = await connection.query(`
+        SELECT * 
+        FROM customers
+        WHERE customers.cpf LIKE $1
+        `,[`${cpf}%`])
+        res.send(customerCpf)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+
+
 }
