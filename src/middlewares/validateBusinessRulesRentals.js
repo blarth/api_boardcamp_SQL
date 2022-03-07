@@ -42,17 +42,19 @@ export async function businessRulesRental(req, res, next){
     next()
 }
 
-export async function businessRulesRentalReturn(req, res, next){
+export async function businessRulesRentalId(req, res, next){
     const {id} = req.params
+
+    const method = req.method === 'POST' ? 'IS' : 'IS NOT'
     
     try {
         const {rows : [validRentalId]} = await connection.query(`
             SELECT *
             FROM rentals
             WHERE rentals.id=$1
-            AND "returnDate" IS NULL
+            AND "returnDate" ${method} NULL
         `, [id])
-        console.log(validRentalId)
+        
         
         if(!validRentalId){
             res.sendStatus(404)

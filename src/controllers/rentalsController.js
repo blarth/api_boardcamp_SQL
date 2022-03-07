@@ -105,3 +105,18 @@ export async function rentalsPostReturn(req, res){
   }
 }
 
+export async function rentalsDelete(req, res){
+  
+  const rentalToBeDeleted = res.locals.rentals
+
+  try {
+    await connection.query(`
+    DELETE 
+    FROM rentals
+    WHERE id=$1
+    `,[rentalToBeDeleted.id])
+    
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}

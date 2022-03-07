@@ -1,7 +1,7 @@
 import express from "express";
-import { rentalsGet, rentalsPost, rentalsPostReturn } from "../controllers/rentalsController.js";
+import { rentalsDelete, rentalsGet, rentalsPost, rentalsPostReturn } from "../controllers/rentalsController.js";
 import { dataHandlerRentals, dataHandlerRentalsReturn } from "../middlewares/dataHandlerRentals.js";
-import { businessRulesRental, businessRulesRentalReturn } from "../middlewares/validateBusinessRulesRentals.js";
+import { businessRulesRental, businessRulesRentalId } from "../middlewares/validateBusinessRulesRentals.js";
 import { validateSchemaRentals } from "../middlewares/validateRentals.js";
 
 
@@ -11,6 +11,8 @@ rentalRouter.get("/rentals" , rentalsGet);
 
 rentalRouter.post("/rentals", validateSchemaRentals, businessRulesRental, dataHandlerRentals, rentalsPost );
 
-rentalRouter.post("/rentals/:id/return", businessRulesRentalReturn, dataHandlerRentalsReturn, rentalsPostReturn)
+rentalRouter.post("/rentals/:id/return", businessRulesRentalId, dataHandlerRentalsReturn, rentalsPostReturn)
+
+rentalRouter.delete("/rentals/:id", businessRulesRentalId, rentalsDelete)
 
 export default rentalRouter;
