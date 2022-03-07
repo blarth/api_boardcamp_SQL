@@ -67,8 +67,7 @@ export async function customersPut(req, res){
     try {
         await connection.query(`
         UPDATE customers 
-        SET (name, phone, cpf, birthday)
-        VALUES ($1, $2, $3, $4)
+        SET name=$1, phone=$2, cpf=$3, birthday=$4)
         WHERE id=$5
         `,[customer.name, customer.phone, customer.cpf, customer.birthday, id])
         res.sendStatus(201)
