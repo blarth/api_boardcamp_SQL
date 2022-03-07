@@ -11,7 +11,7 @@ export async function customersGet(req, res){
             SELECT * 
             FROM customers
             `)
-            res.send(arrayCustomers)
+            return res.send(arrayCustomers)
         } catch (error) {
             res.status(500).send(error.message);
         }
@@ -23,7 +23,7 @@ export async function customersGet(req, res){
             FROM customers
             WHERE customers.id=$1
             `,[id])
-            res.send(customerId)
+            return res.send(customerId)
         } catch (error) {
             res.status(500).send(error.message);
         }
