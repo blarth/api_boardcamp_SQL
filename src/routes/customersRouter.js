@@ -1,5 +1,5 @@
 import express from "express";
-import { customersGet, customersPost } from "../controllers/customersController.js";
+import { customersGet, customersPost, customersPut } from "../controllers/customersController.js";
 import { validateBusinessRulesCustomer } from "../middlewares/validateBusinessRulesCustomers.js";
 import { validateSchemaCustomer } from "../middlewares/validateCustomer.js";
 
