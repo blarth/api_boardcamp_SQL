@@ -14,7 +14,7 @@ server.use(router)
 
 export default router;
 
-server.listen(4000, () => {
-    console.log("Server is listening on port " + 4000);
+server.listen(process.env.PORT, () => {
+    console.log("Server is listening on port " + process.env.PORT);
 });
 
