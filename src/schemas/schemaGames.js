@@ -1,7 +1,7 @@
 import joi from "joi";
 
 
-const schemaValidateName = joi.object({
+const schemaGames = joi.object({
     name: joi.string().required(),
     image: joi.string().required(),
     stockTotal : joi.number().required(),
@@ -10,4 +10,4 @@ const schemaValidateName = joi.object({
 
   });
 
-export default schemaValidateName;
+export default schemaGames;
