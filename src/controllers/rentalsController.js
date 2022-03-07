@@ -38,27 +38,30 @@ export async function rentalsGet(req, res) {
 
     res.send(
       arrayRentals.map((row) => {
+
+        const [id, customerId, gameId, rentDate, daysRented, returnDate, originalPrice, delayFee, customer_Id, customer_Name, game_Id, game_Name, game_CategoryName,  game_CategoryId] = row
+
         const rentalsFormatted = {
-          ...row,
+          id ,
+          customerId,
+          gameId,
           rentDate: dayjs(row.rentDate).format("YYYY-MM-DD"),
+          daysRented,
+          returnDate,
+          originalPrice,
+          delayFee,
           customer: {
-            id: row.customer_Id,
-            name: row.customer_Name,
+            id: customer_Id,
+            name: customer_Name,
           },
           game: {
-            id: row.game_Id,
-            name: row.game_Name,
-            categoryId: row.game_CategoryId,
-            categoryName: row.game_CategoryName,
+            id: game_Id,
+            name: game_Name,
+            categoryName: game_CategoryName,
+            categoryId: game_CategoryId,
           },
         };
 
-        delete rentalsFormatted.customer_Id;
-        delete rentalsFormatted.customer_Name;
-        delete rentalsFormatted.game_CategoryId;
-        delete rentalsFormatted.game_CategoryName;
-        delete rentalsFormatted.game_Id;
-        delete rentalsFormatted.game_Name;
 
         return rentalsFormatted;
       })
@@ -69,16 +72,36 @@ export async function rentalsGet(req, res) {
 }
 
 export async function rentalsPost(req, res){
-    const {customerId, gameId, daysRented, rentDate, originalPrice, returnDate, delayFee} = res.locals.rentals
+    const {customerId, gameId, rentDate, daysRented, originalPrice, returnDate, delayFee} = res.locals.rentals
+    
+    
     
     try {
         await connection.query(`
             INSERT INTO rentals ("customerId", "gameId", "rentDate", "daysRented", "returnDate", "originalPrice", "delayFee")
                 VALUES ($1, $2, $3, $4, $5, $6, $7)
-        `, [customerId, gameId, daysRented, rentDate, originalPrice, returnDate, delayFee]);
+        `, [customerId, gameId, rentDate, daysRented, returnDate, originalPrice, delayFee]);
 
         res.sendStatus(201);
     } catch (error) {
         res.status(500).send(error.message);
     }
 }
+
+
+export async function rentalsPostReturn(req, res){
+
+  const rentalReturn = res.locals.rentals
+
+  try {
+    await connection.query(`
+    UPDATE rentals
+    SET "delayFee"=$1, "returnDate"=$2
+    WHERE id=$3
+    `,[rentalReturn.delayFee, rentalReturn.returnDate, rentalReturn.id])
+    res.sendStatus(200);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
+

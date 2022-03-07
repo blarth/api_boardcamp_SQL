@@ -1,5 +1,6 @@
 import connection from "../../db.js";
 
+
 export async function businessRulesRental(req, res, next){
     const {customerId , gameId} = req.body
     
@@ -7,26 +8,30 @@ export async function businessRulesRental(req, res, next){
         const {rows : [validCustomerId]} = await connection.query(`
             SELECT *
             FROM customers
-            WHERE customers.id=$1
+            WHERE id=$1
         
         `, [customerId])
+        
 
         const {rows : [validGameId]} = await connection.query(`
+        
             SELECT *
             FROM games
-            WHERE games.name=$1
+            WHERE id=$1
         
         `,[gameId])
         
         
         if(!validCustomerId){
-            res.sendStatus(400)
+            
+            return res.sendStatus(400)
         }
         if(!validGameId){
-            res.sendStatus(400)
+            
+            return res.sendStatus(400)
         }
     
-        res.locals.gamePrice = {
+        res.locals.price = {
             price : validGameId.pricePerDay
         }
     
@@ -45,18 +50,22 @@ export async function businessRulesRentalReturn(req, res, next){
             SELECT *
             FROM rentals
             WHERE rentals.id=$1
-            AND rentals."returnDate"=
-        
+            AND "returnDate" IS NULL
         `, [id])
-        
+        console.log(validRentalId)
         
         if(!validRentalId){
             res.sendStatus(404)
         }
+        res.locals.rentals = {
+            ...validRentalId
+        }
+    
     
     } catch (error) {
         res.status(500).send(error.message);
     }
 
+    
     next()
 }
