@@ -11,6 +11,6 @@ rentalRouter.get("/rentals" , rentalsGet);
 
 rentalRouter.post("/rentals", validateSchemaRentals, businessRulesRental, dataHandlerRentals, rentalsPost );
 
-/* rentalRouter.delete("/rentals") */
+rentalRouter.post("/rentals/:id/return")
 
 export default rentalRouter;
