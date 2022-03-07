@@ -57,7 +57,7 @@ export async function businessRulesRentalId(req, res, next){
         
         
         if(!validRentalId){
-            res.sendStatus(404)
+            return res.sendStatus(404)
         }
         res.locals.rentals = {
             ...validRentalId
