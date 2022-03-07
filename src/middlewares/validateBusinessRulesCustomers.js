@@ -11,7 +11,7 @@ export async function validateBusinessRulesCustomer(req, res, next){
         `, [res.locals.customers.cpf])
 
         if(invalidCpf){
-            res.sendStatus(409)
+            return res.sendStatus(409)
         }
     } catch (error) {
         res.status(500).send(error.message);
