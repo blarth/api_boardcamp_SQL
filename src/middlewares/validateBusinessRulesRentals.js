@@ -36,3 +36,27 @@ export async function businessRulesRental(req, res, next){
 
     next()
 }
+
+export async function businessRulesRentalReturn(req, res, next){
+    const {id} = req.params
+    
+    try {
+        const {rows : [validRentalId]} = await connection.query(`
+            SELECT *
+            FROM rentals
+            WHERE rentals.id=$1
+            AND rentals."returnDate"=
+        
+        `, [id])
+        
+        
+        if(!validRentalId){
+            res.sendStatus(404)
+        }
+    
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+
+    next()
+}
