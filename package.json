@@ -18,6 +18,7 @@
     "express": "^4.17.3",
     "joi": "^17.6.0",
     "pg": "^8.7.3",
+    "sqlstring": "^2.3.3",
     "string-strip-html": "^9.1.6"
   },
   "devDependencies": {
