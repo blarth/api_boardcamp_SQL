@@ -21,10 +21,10 @@ export async function businessRulesGames(req, res, next){
         
         
         if(!validIdCategory){
-            res.sendStatus(400)
+            return res.sendStatus(400)
         }
         if(invalidName){
-            res.sendStatus(409)
+            return res.sendStatus(409)
         }
     
     } catch (error) {

@@ -17,7 +17,7 @@ export async function gamesGet(req, res) {
             `,
         [`${filterName}%`]
       );
-      res.send(arrayGames);
+      return res.send(arrayGames);
     } catch (error) {
       res.status(500).send(error.message);
     }
@@ -25,7 +25,7 @@ export async function gamesGet(req, res) {
   try {
     const { rows: arrayGames } = await connection.query(`
         SELECT games.*,
-        categories.name as "categorieName"
+        categories.name as "categoryName"
         FROM games
         JOIN categories
         ON categories.id =
