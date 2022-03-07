@@ -1,4 +1,4 @@
-import schemaValidateRental from "../schemas/schemaRentals";
+import schemaValidateRental from "../schemas/schemaRentals.js";
 
 
 export async function validateSchemaRentals(req, res, next){
