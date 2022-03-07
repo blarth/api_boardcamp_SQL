@@ -9,6 +9,6 @@ customerRouter.get("/customers" , customersGet);
 
 customerRouter.post("/customers" ,validateSchemaCustomer, validateBusinessRulesCustomer , customersPost);
 
-customerRouter.put("/customers" , validateSchemaCustomer, validateBusinessRulesCustomer, customersPut)
+customerRouter.put("/customers/:id" , validateSchemaCustomer, validateBusinessRulesCustomer, customersPut)
 
 export default customerRouter;
