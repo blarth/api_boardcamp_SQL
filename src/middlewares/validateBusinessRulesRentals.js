@@ -65,7 +65,7 @@ export async function businessRulesRentalId(req, res, next){
     
     
     } catch (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
     }
 
     

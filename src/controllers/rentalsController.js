@@ -1,5 +1,7 @@
 import connection from "../../db.js";
 import dayjs from "dayjs";
+import sqlstring from "sqlstring";
+
 
 export async function rentalsGet(req, res) {
   const { customerId, gameId } = req.query;
@@ -45,7 +47,7 @@ export async function rentalsGet(req, res) {
           id ,
           customerId,
           gameId,
-          rentDate: dayjs(row.rentDate).format("YYYY-MM-DD"),
+          rentDate: dayjs(rentDate).format("YYYY-MM-DD"),
           daysRented,
           returnDate,
           originalPrice,
