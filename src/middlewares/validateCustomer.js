@@ -5,8 +5,8 @@ export function validateSchemaCustomer(req, res, next){
     const validation = schemaValidateCustomer.validate(req.body)
     
     if (validation.error) {
-      res.status(400).send(validation.error.details)
-      return;
+      return res.status(400).send(validation.error.details)
+      
     }
     
 

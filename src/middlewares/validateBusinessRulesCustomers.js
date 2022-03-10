@@ -14,7 +14,7 @@ export async function validateBusinessRulesCustomer(req, res, next){
             return res.sendStatus(409)
         }
     } catch (error) {
-        res.status(500).send(error.message);
+       return res.status(500).send(error.message);
     }
 
     next()

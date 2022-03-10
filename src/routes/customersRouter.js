@@ -5,7 +5,7 @@ import { validateSchemaCustomer } from "../middlewares/validateCustomer.js";
 
 const customerRouter = express.Router();
 
-customerRouter.get("/customers" , customersGet);
+customerRouter.get("/customers/:id?" , customersGet);
 
 customerRouter.post("/customers" ,validateSchemaCustomer, validateBusinessRulesCustomer , customersPost);
 
