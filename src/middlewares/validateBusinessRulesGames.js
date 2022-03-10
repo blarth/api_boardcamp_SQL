@@ -28,7 +28,7 @@ export async function businessRulesGames(req, res, next){
         }
     
     } catch (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
     }
 
     next()

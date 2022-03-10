@@ -9,11 +9,10 @@ export async function gamesGet(req, res) {
             SELECT games.*,
             categories.name as "categoryName"
             FROM games
-            WHERE LOWER (name) LIKE LOWER ($1)
             JOIN categories
             ON categories.id =
             games."categoryId"
-
+            WHERE LOWER (name) LIKE LOWER ($1)
             `,
         [`${filterName}%`]
       );
